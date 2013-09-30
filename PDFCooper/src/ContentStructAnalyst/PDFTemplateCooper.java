@@ -102,9 +102,9 @@ public class PDFTemplateCooper {
 	public class Cooper {
 		private StringBuilder rootPath = null;
 		private StringBuilder sourcePDFFileName = null;
-		private StringBuilder destinationPDFFileName = null;
-		private StringBuilder dataHolderPath = null; //Contains classes for pdf file's entire struct.
-		private StringBuilder interfacePath = null; //Contains interface classes for generating final pdf file.
+//		private StringBuilder destinationPDFFileName = null;
+//		private StringBuilder dataHolderPath = null; //Contains classes for pdf file's entire struct.
+//		private StringBuilder interfacePath = null; //Contains interface classes for generating final pdf file.
 		private StringBuilder sourcePDFContent = null; //Contains pdf file content that is additional fields are trimmed
 		private StringBuilder casename = null; //
 	
@@ -113,10 +113,10 @@ public class PDFTemplateCooper {
 		final private static String suffixPackageName = "sl.impl";
 		//class naming
 		final private static String prefixClassName = "MCYS";
-		final private static String suffixClassName_Section = "Section";
-		final private static String suffixClassName_Record = "Record";
+//		final private static String suffixClassName_Section = "Section";
+//		final private static String suffixClassName_Record = "Record";
 		//import statement
-		final private static String importingArrayList = "import java.util.ArrayList;";
+//		final private static String importingArrayList = "import java.util.ArrayList;";
 		//cutting field name in original xml-data
 		final private static String fieldMustBeCut = "dd:dataDescription";
 		private String MapStartAtField = "bks:form";
@@ -133,7 +133,7 @@ public class PDFTemplateCooper {
 			this.rootPath = rootPath;
 		}
 		public Cooper(){
-			initTestData();
+			//initTestData();
 			generater = new Generator(this);
 		}
 		public String getMappingFileRootTag(){
@@ -189,9 +189,9 @@ public class PDFTemplateCooper {
 		
 		protected  StringBuilder readXML() {
 			//Agreement
-			//initTestData("C:/WorkArea/CPIN/PDF Forms Uploading/Agreement/", "Agreement-20130916.pdf", "Agreement");
+			initTestData("C:/WorkArea/CPIN/PDF Forms Uploading/Agreement/", "Agreement-20130916.pdf", "Agreement");
 			//KinshipSummary
-			initTestData("C:/WorkArea/CPIN/PDF Forms Uploading/KinshipSummary/", "KinshipSummary-20130822.pdf", "KinshipSummary");
+			//initTestData("C:/WorkArea/CPIN/PDF Forms Uploading/KinshipSummary/", "KinshipSummary-20130822.pdf", "KinshipSummary");
 			return readXML(rootPath.toString() + sourcePDFFileName.toString());
 		}
 		
@@ -278,6 +278,7 @@ public class PDFTemplateCooper {
 			while (!ti.isEndTag(node.peekNextTag())) {
 				MemberField mf = new MemberField(ti.getTagName(node.peekNextTag()), false, null);
 				if (ti.isStartTag(node.peekNextTag())) {
+					mf.isRecord = true;
 					node.getNextTag();
 					readNode(node, deep, brgStone.parentName);
 				}

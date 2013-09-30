@@ -24,7 +24,10 @@ public class Worker implements Runnable {
 			//variables
 			for (MemberField mf: bs.fields) {
 				mf.className = bs.parentName + cp.capitalFirstChar(mf.fieldName);
-				if (bs.isRoot) pw.println("    private " + mf.className + " " + mf.fieldName + " = null;");
+				if (bs.isRoot) {
+					if (!mf.isRecord) mf.className = "String";
+					pw.println("    private " + mf.className + " " + mf.fieldName + " = null;");
+				}
 				else if (mf.isRecord) pw.println("    private ArrayList<" + mf.className + "> " + mf.fieldName + " = null;");
 				else { 
 					pw.println("    String " + mf.fieldName + " = null;");

@@ -59,7 +59,7 @@ public class Generator {
 					if(bs.isRoot) pw.println(stab + "<map-to xml=\""+ cp.getMappingFileRootTag() + "\" />");
 					else pw.println(stab + stab + "<map-to xml=\"" + bs.memberName +"\" />");
 					for(MemberField mf: bs.fields) {
-						pw.println(stab + stab + "<field name=\"" + mf.fieldName + "\"	type=\"" + ((mf.isRecord || bs.isRoot)? (this.cp.getPackageName() + "."):"") + (mf.className.equals("String")? "string":mf.className) + "\"" + (mf.isRecord? ("\n" + stab + stab + stab + "collection=\"arraylist\""):"") + ">");
+						pw.println(stab + stab + "<field name=\"" + mf.fieldName + "\"	type=\"" + ((mf.isRecord)? (this.cp.getPackageName() + "."):"") + (mf.className.equals("String")? "string":mf.className) + "\"" + ((mf.isRecord && !bs.isRoot)? ("\n" + stab + stab + stab + "collection=\"arraylist\""):"") + ">");
 						pw.println(stab + stab + stab + "<bind-xml name=\"" + mf.fieldName +"\" node=\"element\" />");
 						pw.println(stab + stab + "</field>");
 					}
